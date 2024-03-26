@@ -1,4 +1,4 @@
-package br.com.projetoMVC.DAO;
+package br.com.autenticacaoMVC.DAO;
 
 import java.util.List;
 

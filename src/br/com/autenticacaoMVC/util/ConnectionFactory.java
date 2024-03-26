@@ -1,4 +1,4 @@
-package br.com.projetoMVC.util;
+package br.com.autenticacaoMVC.util;
 
 import java.sql.Statement;
 import java.sql.Connection;

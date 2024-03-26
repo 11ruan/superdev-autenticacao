@@ -1,4 +1,4 @@
-package br.com.projetoMVC;
+package br.com.autenticacaoMVC;
 
 public class Main {
 

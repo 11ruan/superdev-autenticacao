@@ -1,8 +1,8 @@
-package br.com.projetoMVC.test;
+package br.com.autenticacaoMVC.test;
 
 import java.sql.Connection;
 
-import br.com.projetoMVC.util.ConnectionFactory;
+import br.com.autenticacaoMVC.util.ConnectionFactory;
 
 public class ConnectionTest {
 	public static void main(String[] args) {

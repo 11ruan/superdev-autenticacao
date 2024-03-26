@@ -1,4 +1,4 @@
-package br.com.projetoMVC.model;
+package br.com.autenticacaoMVC.model;
 
 public class Usuario {
 	int id;

@@ -1,4 +1,4 @@
-package br.com.projetoMVC.DAO;
+package br.com.autenticacaoMVC.DAO;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -7,8 +7,8 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
-import br.com.projetoMVC.model.Usuario;
-import br.com.projetoMVC.util.ConnectionFactory;
+import br.com.autenticacaoMVC.model.Usuario;
+import br.com.autenticacaoMVC.util.ConnectionFactory;
 
 public class UsuarioDAOImpl implements GenericDAO {
 
