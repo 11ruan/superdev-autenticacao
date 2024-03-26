@@ -14,12 +14,10 @@ public class UsuarioDAOImpl implements GenericDAO {
 
 	private Connection conn;
 
-	// Construtor vazio da classe ProdutoDAOImpl, iniciando a conexão com o banco
-	// de dados através da classe ConnectionFactory
+
 	public UsuarioDAOImpl() throws Exception {
 		try {
 			this.conn = ConnectionFactory.getConnection();
-			// System.out.println("ProdutoDAOImpl: Conectado com sucesso!");
 		} catch (Exception ex) {
 			throw new Exception(ex.getMessage());
 		}
@@ -31,7 +29,7 @@ public class UsuarioDAOImpl implements GenericDAO {
 		List<Object> lista = new ArrayList<Object>();
 		PreparedStatement stmt = null;
 		ResultSet rs = null;
-		String sql = "SELECT * FROM usuario";
+		String sql = "SELECT id, nome, email, ativo FROM usuario";
 
 		try {
 			stmt = conn.prepareStatement(sql);
@@ -41,7 +39,6 @@ public class UsuarioDAOImpl implements GenericDAO {
 				usuario.setId(rs.getInt("id"));
 				usuario.setNome(rs.getString("nome"));
 				usuario.setEmail(rs.getString("email"));
-				usuario.setSenha(rs.getString("senha"));
 				usuario.setAtivo(rs.getBoolean("ativo"));
 				lista.add(usuario);
 			}
@@ -64,16 +61,18 @@ public class UsuarioDAOImpl implements GenericDAO {
 		Usuario usuario = null;
 		PreparedStatement stmt = null;
 		ResultSet rs = null;
-		String sql = "SELECT * FROM usuario WHERE id = ?";
+		String sql = "SELECT id, nome, email, ativo"
+				+ " FROM usuario"
+				+ " WHERE id = ?";
 		try {
 			stmt = conn.prepareStatement(sql);
 			stmt.setInt(1, id);
 			rs = stmt.executeQuery();
 			if (rs.next()) {
+				usuario = new Usuario();
 				usuario.setId(rs.getInt("id"));
 				usuario.setNome(rs.getString("nome"));
 				usuario.setEmail(rs.getString("email"));
-				usuario.setSenha(rs.getString("senha"));
 				usuario.setAtivo(rs.getBoolean("ativo"));
 			}
 		} catch (SQLException ex) {
@@ -95,14 +94,15 @@ public class UsuarioDAOImpl implements GenericDAO {
 
 		Usuario usuario = (Usuario) object;
 		PreparedStatement stmt = null;
-		String sql = "INSERT INTO usuario (nome, email, senha, ativo) VALUES (?)";
+		String sql = "INSERT INTO usuario (nome, email, senha, ativo)"
+				+ " VALUES (?,?,?,?)";
 
 		try {
 			stmt = conn.prepareStatement(sql);
 			stmt.setString(1, usuario.getNome());
 			stmt.setString(2, usuario.getEmail());
 			stmt.setString(3, usuario.getSenha());
-			stmt.setBoolean(4, usuario.getAtivo());
+			stmt.setBoolean(4, true);
 			stmt.execute();
 			return true;
 		} catch (Exception ex) {
@@ -123,14 +123,19 @@ public class UsuarioDAOImpl implements GenericDAO {
 	public boolean alterar(Object object) {
 		Usuario usuario = (Usuario) object;
 		PreparedStatement stmt = null;
-		String sql = "UPDATE usuario SET nome = ?, email = ?, senha = ?, ativo = ? WHERE id = ?";
+		String sql = "UPDATE usuario SET"
+				+ " nome = ?,"
+				+ " email = ?,"
+				+ " senha = ?,"
+				+ " ativo = ? "
+				+ "WHERE id = ?";
 
 		try {
 			stmt = conn.prepareStatement(sql);
 			stmt.setString(1, usuario.getNome());
 			stmt.setString(2, usuario.getEmail());
-			stmt.setString(3, usuario.getSenha());
-			stmt.setBoolean(4, usuario.getAtivo());
+			stmt.setBoolean(3, usuario.getAtivo());
+			stmt.setInt(4, usuario.getId());
 			stmt.execute();
 			return true;
 		} catch (SQLException ex) {
