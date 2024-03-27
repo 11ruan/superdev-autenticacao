@@ -44,6 +44,7 @@ public class UsuarioController {
 		try {
 			GenericDAO dao = new UsuarioDAOImpl();
 			dao.cadastrar(usuario);
+			System.out.println("Cadastrado com Sucesso!");
 			return true;
 		} catch (Exception ex) {
 			System.out.println("Problema na Controller para cadastrar Usuario" + ex.getMessage());

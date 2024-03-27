@@ -14,7 +14,6 @@ public class UsuarioDAOImpl implements GenericDAO {
 
 	private Connection conn;
 
-
 	public UsuarioDAOImpl() throws Exception {
 		try {
 			this.conn = ConnectionFactory.getConnection();
@@ -61,9 +60,7 @@ public class UsuarioDAOImpl implements GenericDAO {
 		Usuario usuario = null;
 		PreparedStatement stmt = null;
 		ResultSet rs = null;
-		String sql = "SELECT id, nome, email, ativo"
-				+ " FROM usuario"
-				+ " WHERE id = ?";
+		String sql = "SELECT id, nome, email, ativo" + " FROM usuario" + " WHERE id = ?";
 		try {
 			stmt = conn.prepareStatement(sql);
 			stmt.setInt(1, id);
@@ -94,8 +91,8 @@ public class UsuarioDAOImpl implements GenericDAO {
 
 		Usuario usuario = (Usuario) object;
 		PreparedStatement stmt = null;
-		String sql = "INSERT INTO usuario (nome, email, senha, ativo)"
-				+ " VALUES (?,?,?,?)";
+		String sql = "INSERT INTO usuario (nome, email, senha, ativo)" 
+		+ " VALUES (?,?,MD5(?),?)";
 
 		try {
 			stmt = conn.prepareStatement(sql);
@@ -123,11 +120,7 @@ public class UsuarioDAOImpl implements GenericDAO {
 	public boolean alterar(Object object) {
 		Usuario usuario = (Usuario) object;
 		PreparedStatement stmt = null;
-		String sql = "UPDATE usuario SET"
-				+ " nome = ?,"
-				+ " email = ?,"
-				+ " senha = ?,"
-				+ " ativo = ? "
+		String sql = "UPDATE usuario SET" + " nome = ?," + " email = ?," + " senha = ?," + " ativo = ? "
 				+ "WHERE id = ?";
 
 		try {
